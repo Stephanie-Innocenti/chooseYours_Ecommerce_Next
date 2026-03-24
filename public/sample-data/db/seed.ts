@@ -1,5 +1,4 @@
-
-import 'dotenv/config'; 
+import "dotenv/config";
 import sampleData from "./sample-data";
 import { PrismaClient } from "../../../prisma/generated/client/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -9,6 +8,10 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 
 const prisma = new PrismaClient({ adapter });
+
+// seed.ts
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
 async function main() {
   try {
     await prisma.product.deleteMany();

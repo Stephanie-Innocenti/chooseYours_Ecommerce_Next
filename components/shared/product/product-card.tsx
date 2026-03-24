@@ -19,7 +19,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           ></Image>
         </Link>
       </CardHeader>
-      <CardContent className="padding-4 grid gap-4">
+      <CardContent className="padding-6 grid gap-4">
         <div className="text-xs">{product.brand}</div>
         <Link href={`/product/${product.slug}`}>
           <h2 className="text-sm font-medium">{product.name}</h2>

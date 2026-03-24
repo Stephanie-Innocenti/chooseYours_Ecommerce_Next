@@ -2,22 +2,15 @@
 
 import { cookies } from 'next/headers';
 import { CartItem } from '@/app/types';
-import { convertToPlainObject, round2 } from '../utils';
+import { convertToPlainObject, round2 } from '@/lib/utils';
 import { auth } from '@/app/auth';
-// import { prisma } from '@/db/prisma';
 import { cartItemSchema, insertCartSchema } from '../validators';
 import { revalidatePath } from 'next/cache';
-import { signInFormSchema,signUpFormSchema} from "../validators";
-import { signIn } from "@/app/auth";
-import { signOut } from "@/app/auth";
-import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { hashSync } from "bcrypt-ts-edge";
 import { PrismaClient } from "../../prisma/generated/client/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import { formatError } from '../utils';
 import type * as Prisma from '@/prisma/generated/client/internal/prismaNamespace';
-import { CartUpdateitemInput } from '@/prisma/generated/client/models/Cart';
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 
@@ -106,14 +99,14 @@ export async function addItemToCart(data: CartItem) {
         cart.items.push(item);
       }
 
-      // Save to database
-      await prisma.cart.update({
-        where: { id: cart.id },
-        data: {
-          item: cart.items as Prisma.CartUpdateitemInput[],
-          ...calcPrice(cart.items as CartItem[]),
-        },
-      });
+      // // Save to database
+      // await prisma.cart.update({
+      //   where: { id: cart.id },
+      //   data: {
+      //     items: cart.items as Prisma.CartUpdateitemsInput[],
+      //     ...calcPrice(cart.items as CartItem[]),
+      //   },
+      // });
 
       revalidatePath(`/product/${product.slug}`);
 
@@ -151,7 +144,7 @@ export async function getMyCart() {
   // Convert decimals and return
   return convertToPlainObject({
     ...cart,
-    items: cart.item as CartItem[],
+    items: cart.items as CartItem[],
     itemsPrice: cart.itemsPrice.toString(),
     totalPrice: cart.totalPrice.toString(),
     shippingPrice: cart.shippingPrice.toString(),
@@ -186,13 +179,13 @@ export async function removeItemFromCart(productId: string) {
         exist.qty - 1;
     }
 
-    await prisma.cart.update({
-      where: { id: cart.id },
-      data: {
-        item: cart.items as Prisma.CartUpdateitemInput[] ,
-        ...calcPrice(cart.items as CartItem[]),
-      },
-    });
+    // await prisma.cart.update({
+    //   where: { id: cart.id },
+    //   data: {
+    //     item: cart.items as Prisma.CartUpdateitemInput[] ,
+    //     ...calcPrice(cart.items as CartItem[]),
+    //   },
+    // });
 
     revalidatePath(`/product/${product.slug}`);
 

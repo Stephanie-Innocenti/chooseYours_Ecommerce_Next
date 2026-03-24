@@ -6,25 +6,14 @@ import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "../lib/costants/index";
 import { URL } from "url";
 import { ThemeProvider } from "next-themes";
 
-
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: APP_NAME,
   description: APP_DESCRIPTION,
- metadataBase: process.env.SERVER_URL 
-  ? new URL(process.env.SERVER_URL) 
-  : new URL('http://localhost:3000'), // fallback
+  metadataBase: new URL(SERVER_URL)
 };
 
 export default function RootLayout({
@@ -38,9 +27,8 @@ export default function RootLayout({
       className={cn("font-sans", inter.variable)}
       suppressHydrationWarning
     >
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+            <body className={`${inter.className} antialiased`}>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

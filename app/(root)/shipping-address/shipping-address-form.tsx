@@ -15,12 +15,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Loader } from 'lucide-react';
-// import { updateUserAddress } from '@/lib/actions/user.actions';
+import { updateUserAddress } from '@/lib/actions/user.actions';
 import { shippingAddressDefault } from '@/lib/costants/index'
 
 const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
@@ -73,12 +72,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'fullName'
                   >;
                 }) => (
-                  <FormItem className='w-full'>
+                  <FormItem >
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter full name' {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -95,12 +93,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'streetAddress'
                   >;
                 }) => (
-                  <FormItem className='w-full'>
+                  <FormItem >
                     <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter address' {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -117,12 +114,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'city'
                   >;
                 }) => (
-                  <FormItem className='w-full'>
+                  <FormItem >
                     <FormLabel>City</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter city' {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -139,12 +135,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'postalCode'
                   >;
                 }) => (
-                  <FormItem className='w-full'>
+                  <FormItem>
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter postal code' {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -161,12 +156,11 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'country'
                   >;
                 }) => (
-                  <FormItem className='w-full'>
+                  <FormItem >
                     <FormLabel>Country</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter country' {...field} />
                     </FormControl>
-                    <FormMessage />
                   </FormItem>
                 )}
               />
