@@ -9,7 +9,7 @@ import { createOrder } from '@/lib/actions/order.actions';
 const PlaceOrderForm = () => {
   const router = useRouter();
 
- const handleSubmit = async (event : React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const res = await createOrder();

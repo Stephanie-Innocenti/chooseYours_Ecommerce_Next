@@ -1,16 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "dotenv/config";
+
 import sampleData from "./sample-data";
 import { PrismaClient } from "../../../prisma/generated/client/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import { hash } from "@/lib/encrypt";
+import { hashSync } from "bcrypt-ts-edge";
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL!,
+  ssl: { rejectUnauthorized: false },
+});
 const adapter = new PrismaPg(pool);
 
 const prisma = new PrismaClient({ adapter });
 
 // seed.ts
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 async function main() {
   try {
@@ -22,11 +28,15 @@ async function main() {
     await prisma.product.createMany({
       data: sampleData.products,
     });
-    await prisma.user.createMany({
-      data: sampleData.users,
-    });
+    const users = [];
+    for (let i = 0; i < sampleData.users.length; i++) {
+      users.push({
+        ...sampleData.users[i],
+        password: hashSync("123456", 10).toString(),
+      });
+    }
+    await prisma.user.createMany({ data: users });
 
-    console.log("Dati inseriti con successo!");
   } catch (error) {
     console.error("Errore durante il seeding:", error);
     process.exit(1);

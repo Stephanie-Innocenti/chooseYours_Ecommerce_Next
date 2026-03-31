@@ -1,10 +1,9 @@
 'use client';
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useRouter } from 'next/navigation';
-import { toast } from "sonner"
+import { useToast } from '@/hooks/use-toast';
 import { useTransition } from 'react';
-import { ShippingAddress } from '@/app/types';
+import { ShippingAddress } from '@/types';
 import { shippingAddressSchema } from '@/lib/validators';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControllerRenderProps, useForm, SubmitHandler } from 'react-hook-form';
@@ -15,19 +14,21 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '@/components/ui/form'
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Loader } from 'lucide-react';
 import { updateUserAddress } from '@/lib/actions/user.actions';
-import { shippingAddressDefault } from '@/lib/costants/index'
+import { shippingAddressDefaultValues } from '@/lib/constants';
 
 const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof shippingAddressSchema>>({
     resolver: zodResolver(shippingAddressSchema),
-    defaultValues: address || shippingAddressDefault,
+    defaultValues: address || shippingAddressDefaultValues,
   });
 
   const [isPending, startTransition] = useTransition();
@@ -38,9 +39,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
     startTransition(async () => {
       const res = await updateUserAddress(values);
 
-     if (!res.success) {
-        toast.error(res.message)  
-        return
+      if (!res.success) {
+        toast({
+          variant: 'destructive',
+          description: res.message,
+        });
+        return;
       }
 
       router.push('/payment-method');
@@ -72,11 +76,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'fullName'
                   >;
                 }) => (
-                  <FormItem >
+                  <FormItem className='w-full'>
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter full name' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -93,11 +98,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'streetAddress'
                   >;
                 }) => (
-                  <FormItem >
+                  <FormItem className='w-full'>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter address' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -114,11 +120,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'city'
                   >;
                 }) => (
-                  <FormItem >
+                  <FormItem className='w-full'>
                     <FormLabel>City</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter city' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -135,11 +142,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'postalCode'
                   >;
                 }) => (
-                  <FormItem>
+                  <FormItem className='w-full'>
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter postal code' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -156,11 +164,12 @@ const ShippingAddressForm = ({ address }: { address: ShippingAddress }) => {
                     'country'
                   >;
                 }) => (
-                  <FormItem >
+                  <FormItem className='w-full'>
                     <FormLabel>Country</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter country' {...field} />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

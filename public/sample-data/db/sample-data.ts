@@ -4,7 +4,7 @@ const sampleData = {
     {
       name:'Steph',
       email:'admin@prova.com',
-      password:hashSync('123456',10).toString(),
+      password:'123456',
       role:'admin',
       address: {},
       
@@ -12,21 +12,21 @@ const sampleData = {
     {
       name:'Jane',
       email:'user@prova.com',
-      password:hashSync('123456',10).toString(),
+      password:'123456',
       role:'user',
       address: {},
     },
      {
       name:'Sys',
       email:'sys@prova.com',
-      password:hashSync('123456',10).toString(),
+      password:'123456',
       role:'user',
       address: {},
     },
      {
       name:'Vi',
       email:'vi@prova.com',
-      password:hashSync('123456',10).toString(),
+      password:'123456',
       role:'user',
       address: {},
     }

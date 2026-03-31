@@ -1,11 +1,11 @@
-import { auth } from '@/app/auth'
+import { auth } from '@/auth';
 import { getMyCart } from '@/lib/actions/cart.actions';
 import { getUserById } from '@/lib/actions/user.actions';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { ShippingAddress } from '../../types/index';
-import ShippingAddressForm from '@/app/(root)/shipping-address/shipping-address-form'
-import CheckoutSteps from '@/components/shared/product/checkout-steps';
+import { ShippingAddress } from '@/types';
+import ShippingAddressForm from './shipping-address-form';
+import CheckoutSteps from '@/components/shared/checkout-steps';
 
 export const metadata: Metadata = {
   title: 'Shipping Address',

@@ -2,41 +2,59 @@
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Plus, Minus, Loader } from 'lucide-react';
-import { Cart, CartItem } from '@/app/types';
-import { toast } from "sonner"
-import { addItemToCart,removeItemFromCart } from '@/lib/actions/cart.actions';
+import { Cart, CartItem } from '@/types';
+import { useToast } from '@/hooks/use-toast';
+import { ToastAction } from '@/components/ui/toast';
+import { addItemToCart, removeItemFromCart } from '@/lib/actions/cart.actions';
 import { useTransition } from 'react';
 
 const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = async () => {
     startTransition(async () => {
-      const res = await addItemToCart(item)
+      const res = await addItemToCart(item);
 
       if (!res.success) {
-        toast.error(res.message)  
-        return
+        toast({
+          variant: 'destructive',
+          description: res.message,
+        });
+        return;
       }
 
-      // Success con action corretta
-      toast.success(res.message, {
-        action: {
-          label: "Vai al carrello",
-          onClick: () => router.push('/cart')
-        }
-      })
-    })
-  }
+      // Handle success add to cart
+      toast({
+        description: res.message,
+        action: (
+          <ToastAction
+            className='bg-primary text-white hover:bg-gray-800'
+            altText='Go To Cart'
+            onClick={() => router.push('/cart')}
+          >
+            Go To Cart
+          </ToastAction>
+        ),
+      });
+    });
+  };
 
-  // // Handle remove from cart
-    const handleRemoveFromCart = async () => {
+  // Handle remove from cart
+  const handleRemoveFromCart = async () => {
     startTransition(async () => {
-      const res = await removeItemFromCart(item.productId)
-      toast[res.success ? "success" : "error"](res.message)
-    })
-  }
+      const res = await removeItemFromCart(item.productId);
+
+      toast({
+        variant: res.success ? 'default' : 'destructive',
+        description: res.message,
+      });
+
+      return;
+    });
+  };
 
   // Check if item is in cart
   const existItem =

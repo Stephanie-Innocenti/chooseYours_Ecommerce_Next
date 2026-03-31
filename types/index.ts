@@ -1,22 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-wrapper-object-types */
-import { z } from "zod";
+import { z } from 'zod';
 import {
-  cartItemSchema,
+  insertProductSchema,
   insertCartSchema,
+  cartItemSchema,
+  shippingAddressSchema,
   insertOrderItemSchema,
   insertOrderSchema,
-  insertProductSchema,
-  insertReviewSchema,
-  shippingAddressSchema,
   paymentResultSchema,
-} from "@/lib/validators";
+  insertReviewSchema,
+} from '@/lib/validators';
 
 export type Product = z.infer<typeof insertProductSchema> & {
   id: string;
-  name: string;
+  rating: string;
+  numReviews: number;
   createdAt: Date;
-  rating : any;
 };
 
 export type Cart = z.infer<typeof insertCartSchema>;
@@ -25,14 +23,18 @@ export type ShippingAddress = z.infer<typeof shippingAddressSchema>;
 export type OrderItem = z.infer<typeof insertOrderItemSchema>;
 export type Order = z.infer<typeof insertOrderSchema> & {
   id: string;
-  name: string;
   createdAt: Date;
-  isPaid: Boolean;
-  isDelivered: Boolean;
+  isPaid: boolean;
   paidAt: Date | null;
+  isDelivered: boolean;
   deliveredAt: Date | null;
-  orderItems: OrderItem[];
+  orderitems: OrderItem[];
   user: { name: string; email: string };
+  paymentResult: PaymentResult;
 };
-export type Review = z.infer<typeof insertReviewSchema>;
 export type PaymentResult = z.infer<typeof paymentResultSchema>;
+export type Review = z.infer<typeof insertReviewSchema> & {
+  id: string;
+  createdAt: Date;
+  user?: { name: string };
+};

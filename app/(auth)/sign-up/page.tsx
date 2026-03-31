@@ -8,8 +8,8 @@ import {
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { APP_NAME } from '@/lib/costants';
-import { auth } from '../../auth'
+import { APP_NAME } from '@/lib/constants';
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import SignUpForm from './sign-up-form';
 
@@ -43,13 +43,13 @@ const SignUpPage = async (props: {
               priority={true}
             />
           </Link>
-          <CardTitle className='text-center'>Sign In</CardTitle>
+          <CardTitle className='text-center'>Create Account</CardTitle>
           <CardDescription className='text-center'>
-           Create account with your information
+            Enter your information below to sign up
           </CardDescription>
         </CardHeader>
         <CardContent className='space-y-4'>
-          <SignUpForm></SignUpForm>
+          <SignUpForm />
         </CardContent>
       </Card>
     </div>
