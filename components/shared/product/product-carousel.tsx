@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/carousel';
 import { Product } from '@/types';
 import Autoplay from 'embla-carousel-autoplay';
-import Link from 'next/link';
 import Image from 'next/image';
 const ProductCarousel = ({ data }: { data: Product[] }) => {
 
@@ -38,7 +37,7 @@ const ProductCarousel = ({ data }: { data: Product[] }) => {
                   height={200}
                   width='0'
                   sizes='100vw'
-                  className='w-full h-100'
+                  className='w-full h-70'
                 />
                 {/* <div className='absolute inset-0 flex items-end justify-center'>
                   <h2 className='bg-gray-900 bg-opacity-50 text-2xl font-bold px-2 text-white'>

@@ -4,9 +4,9 @@ import { hash } from "@/lib/encrypt";
 
 async function main() {
   const prisma = new PrismaClient();
-  await prisma.product.deleteMany();
+  // await prisma.product.deleteMany();
   await prisma.account.deleteMany();
-  await prisma.session.deleteMany();
+  // await prisma.session.deleteMany();
   await prisma.verificationToken.deleteMany();
   await prisma.user.deleteMany();
 
