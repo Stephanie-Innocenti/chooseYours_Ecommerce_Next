@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useTransition } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import { Button } from '../ui/button';
 import {
   AlertDialog,

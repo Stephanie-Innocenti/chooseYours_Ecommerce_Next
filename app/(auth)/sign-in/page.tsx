@@ -8,7 +8,7 @@ import {
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { APP_NAME } from '@/lib/constants';
+import { APP_NAME } from '@/lib/costants';
 import CredentialsSignInForm from './credentials-signin-form';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';

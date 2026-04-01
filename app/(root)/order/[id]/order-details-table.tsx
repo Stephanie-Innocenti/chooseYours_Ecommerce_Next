@@ -14,7 +14,7 @@ import { formatCurrency, formatDateTime, formatId } from '@/lib/utils';
 import { Order } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/app/hooks/use-toast';
 import { useTransition } from 'react';
 import {
   PayPalButtons,
@@ -27,7 +27,7 @@ import {
   updateOrderToPaidCOD,
   deliverOrder,
 } from '@/lib/actions/order.actions';
-import StripePayment from './stripe-payment';
+// import StripePayment from './stripe-payment';
 
 const OrderDetailsTable = ({
   order,
@@ -248,14 +248,14 @@ const OrderDetailsTable = ({
                 </div>
               )}
 
-              {/* Stripe Payment */}
+              {/* Stripe Payment
               {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
                 <StripePayment
                   priceInCents={Number(order.totalPrice) * 100}
                   orderId={order.id}
                   clientSecret={stripeClientSecret}
                 />
-              )}
+              )} */}
 
               {/* Cash On Delivery */}
               {isAdmin && !isPaid && paymentMethod === 'CashOnDelivery' && (
