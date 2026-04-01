@@ -10,7 +10,7 @@ async function main() {
   await prisma.verificationToken.deleteMany();
   await prisma.user.deleteMany();
 
-  await prisma.product.createMany({ data: sampleData.products });
+  // await prisma.product.createMany({ data: sampleData.products });
   const users = [];
   for (let i = 0; i < sampleData.users.length; i++) {
     users.push({
