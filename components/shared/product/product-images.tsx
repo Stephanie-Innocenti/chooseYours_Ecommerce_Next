@@ -13,12 +13,12 @@ const ProductImages = ({ images }: { images: string[] }) => {
         alt='product image'
         width={1000}
         height={1000}
-        className='min-h-[300px] object-cover object-center'
+        className='min-h-75 object-cover object-center'
       />
       <div className='flex'>
         {images.map((image, index) => (
           <div
-            key={image}
+            key={index}
             onClick={() => setCurrent(index)}
             className={cn(
               'border mr-2 cursor-pointer hover:border-orange-600',

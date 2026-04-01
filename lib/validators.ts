@@ -9,8 +9,8 @@ const currency = z
     'Price must have exactly two decimal places'
   );
 
-// Schema for inserting products
-export const insertProductSchema = z.object({
+// validators.ts
+export const baseProductSchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters'),
   slug: z.string().min(3, 'Slug must be at least 3 characters'),
   category: z.string().min(3, 'Category must be at least 3 characters'),
@@ -23,8 +23,9 @@ export const insertProductSchema = z.object({
   price: currency,
 });
 
-// Schema for updating products
-export const updateProductSchema = insertProductSchema.extend({
+export const insertProductSchema = baseProductSchema; // senza id
+
+export const updateProductSchema = baseProductSchema.extend({
   id: z.string().min(1, 'Id is required'),
 });
 

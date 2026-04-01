@@ -37,6 +37,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             credentials.password as string,
             user.password
           );
+        console.log(isMatch)
 
           // If password is correct, return user
           if (isMatch) {
@@ -44,7 +45,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               id: user.id,
               name: user.name,
               email: user.email,
-              role: user.role,
+              role: user.role ?? "user",
             };
           }
         }

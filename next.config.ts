@@ -1,10 +1,15 @@
 import type { NextConfig } from "next";
 
-const nextConfig:NextConfig= {
-  allowedDevOrigins: ['192.168.1.102', '192.168.1.0/24']
-}
-
-module.exports = nextConfig
-
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        port: "",
+      },
+    ],
+  },
+};
 
 export default nextConfig;

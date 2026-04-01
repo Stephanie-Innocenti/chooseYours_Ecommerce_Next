@@ -32,7 +32,7 @@ export async function signInWithCredentials(
     });
 
     await signIn('credentials', user);
-
+console.log(user)
     return { success: true, message: 'Signed in successfully' };
   } catch (error) {
     if (isRedirectError(error)) {
